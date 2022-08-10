@@ -1,6 +1,6 @@
 <template>
     <view>
-        <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
+        <swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="500" :circular="true">
             <swiper-item v-for="(item,index) in swiperList" :key="item.goods_id">
                 <navigator :url="'/subpkg/goods_detail/goods_detail?goods_id='+item.goods_id" class="swiper-item">
                     <image :src="item.image_src"></image>
@@ -123,20 +123,23 @@
     }
 
     .floor_list {
-        .floor-title {
-            width: 100%;
-            height: 60rpx;
-            display: flex;
-        }
-        .floor-img-box {
-            display: flex;
-            justify-content: space-between;
-            padding-left: 10rpx;
-            
-            .right-img-box {
+        .floor-item{
+            padding: 20rpx 0;
+            .floor-title {
+                width: 100%;
+                height: 60rpx;
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
+            }
+            .floor-img-box {
+                display: flex;
+                justify-content: space-between;
+                padding-left: 10rpx;
+                
+                .right-img-box {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-around;
+                }
             }
         }
     }
