@@ -45,12 +45,8 @@
         "appid" : "wx2eb7a844f25b3d78",
         "setting" : {
             "urlCheck" : true,
-			"checkSiteMap": false
+            "checkSiteMap" : false
         },
-        "permission" : {
-            "scope.userLocation" : {
-                "desc" : ""
-            }
-        }
+        "permission" : {}
     }
 }
