@@ -2,9 +2,7 @@ import Vue from 'vue'
 import App from './App'
 
 // 导入网络请求的包
-import {
-    $http
-} from '@escook/request-miniprogram'
+import { $http } from '@escook/request-miniprogram'
 // 挂载到 uni 顶级对象中
 uni.$http = $http
 // 设置请求的根路径
