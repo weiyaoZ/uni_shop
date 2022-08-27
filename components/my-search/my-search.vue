@@ -28,7 +28,6 @@
         },
         methods:{
             searchBoxHandler() {
-                console.log('11')
                 this.$emit('click')
             }
         }

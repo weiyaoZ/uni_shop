@@ -34,7 +34,25 @@
 </template>
 
 <script>
+    import {
+        mapState,
+        mapMutations,
+        mapGetters
+    } from 'vuex'
     export default {
+        watch: {
+            total: {
+                // 页面加载完毕调用一次监听器
+                immediate: true,
+                // 事件处理函数
+                handler(newVal) {
+                    const findResult = this.options.find(x => x.text === '购物车')
+                    if (findResult) {
+                        findResult.info = newVal
+                    }
+                }
+            }
+        },
         data() {
             return {
                 // 商品详情的数据
@@ -46,7 +64,7 @@
                 }, {
                     icon: 'cart',
                     text: '购物车',
-                    info: 2
+                    info: 0
                 }],
                 // 右侧按钮组的配置对象
                 buttonGroup: [{
@@ -62,11 +80,16 @@
                 ]
             };
         },
+        computed: {
+            ...mapState('m_cart', []),
+            ...mapGetters('m_cart', ['total'])
+        },
         onLoad(options) {
             const goods_id = options.goods_id
             this.getGoodsDetail(goods_id)
         },
         methods: {
+            ...mapMutations('m_cart', ['addToCart']),
             async getGoodsDetail(goods_id) {
                 const {
                     data: res
@@ -91,11 +114,26 @@
             },
             onClick(e) {
                 // 当触发事件的元素是购物车的时候跳转
-                if(e.content.text = '购物车') {
+                if (e.content.text = '购物车') {
                     // 切换到购物车页面
                     uni.switchTab({
                         url: '/pages/cart/cart'
                     })
+                }
+            },
+            buttonClick(e) {
+                if (e.content.text === '加入购物车') {
+                    const goods = {
+                        goods_count: 1,
+                        goods_state: true,
+                        goods_id: this.goods_info.goods_id,
+                        goods_name: this.goods_info.goods_name,
+                        goods_price: this.goods_info.goods_price,
+                        goods_small_logo: this.goods_info.goods_small_logo
+                    }
+
+                    // 调用 addToCart 方法，将商品信息加入购物车
+                    this.addToCart(goods)
                 }
             }
         }
@@ -111,7 +149,7 @@
             height: 100%;
         }
     }
-    
+
     .goods_detail_container {
         padding-bottom: 50px;
     }
@@ -154,7 +192,7 @@
             margin: 20rpx 0;
         }
     }
-    
+
     .goods_nav {
         position: fixed;
         left: 0;

@@ -56,7 +56,7 @@
 				this.inputValue = +val;
 			},
 			inputValue(newVal, oldVal) {
-				if (+newVal !== +oldVal) {
+				if (+newVal !== +oldVal && Number(newVal) && String(newVal).indexOf('.') === -1) {
 					this.$emit("change", newVal);
 				}
 			}
@@ -103,7 +103,7 @@
 			_onBlur(event) {
 				let value = event.detail.value;
 				if (!value) {
-					// this.inputValue = 0;
+					this.inputValue = 1
 					return;
 				}
 				value = +value;

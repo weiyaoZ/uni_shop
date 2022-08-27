@@ -44,7 +44,9 @@
 </template>
 
 <script>
+    import badgeMix from '@/mixins/tabbar-badge.js'
     export default {
+        mixins: [badgeMix],
         data() {
             return {
                 // 轮播图的数据列表
@@ -107,6 +109,7 @@
             this.getNavList()
             // 获取楼层的数据
             this.getFloorList()
+            // uni.hideTabBar()
         }
     }
 </script>

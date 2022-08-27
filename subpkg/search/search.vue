@@ -120,11 +120,8 @@
             justify-content: space-between;
             
             .goods-name {
-                // 文字不允许换行
                 white-space: nowrap;
-                // 隐藏溢出部分
                 overflow: hidden;
-                // 文字溢出后，使用... 代替
                 text-overflow: ellipsis;
                 margin-right: 6rpx;
             }
