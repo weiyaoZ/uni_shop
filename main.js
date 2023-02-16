@@ -9,25 +9,33 @@ import { $http } from '@escook/request-miniprogram'
 uni.$http = $http
 // 设置请求的根路径
 $http.baseUrl = 'https://api-hmugo-web.itheima.net'
+// $http.baseUrl = 'https://api-ugo-web.itheima.net/'
 
 // 请求前展示加载的效果
 $http.beforeRequest = function(options) {
-    uni.showLoading({
-        title: "数据加载中..."
-    })
+  uni.showLoading({
+    title: "数据加载中..."
+  })
+
+  // 判断当前请求的是否为有权限的接口
+  if (options.url.includes('/my/')) {
+    options.header = {
+      Authorization: store.state.m_user.token
+    }
+  }
 }
 // 响应拦截器 请求完成之后关闭加载的效果
 $http.afterRequest = function() {
-    uni.hideLoading()
+  uni.hideLoading()
 }
 
 // 封装弹框的方法
 uni.$showMsg = function(title = "数据请求失败", duration = 1500) {
-    uni.showToast({
-        title,
-        duration,
-        icon:'none'
-    })
+  uni.showToast({
+    title,
+    duration,
+    icon: 'none'
+  })
 }
 
 Vue.config.productionTip = false
@@ -35,7 +43,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App,
-    store
+  ...App,
+  store
 })
 app.$mount()

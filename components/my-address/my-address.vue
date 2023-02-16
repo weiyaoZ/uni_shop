@@ -18,7 +18,7 @@
             </view>
             <view class="row2">
                 <view class="row2-left">收获地址：</view>
-                <view class="row2-right">{{addstr}}</view>
+                <view class="row2-right">{{addStr}}</view>
             </view>
         </view>
         
@@ -37,16 +37,16 @@
         },
         methods:{
             ...mapMutations('m_user', ['updateAddresss']),
-           async chooseAddress() {
-                const [err, succ] = await uni.chooseAddress().catch( err => err)
-                if(err === null && succ.errMsg === 'chooseAddress:ok') {
-                    this.updateAddresss(succ)
-                }
+         async chooseAddress() {
+            const [err, succ] = await uni.chooseAddress().catch( err => err)
+            if (succ && succ.errMsg === 'chooseAddress:ok') {
+                this.updateAddresss(succ)
             }
+          }
         },
         computed: {
             ...mapState('m_user', ['address']),
-            ...mapGetters('m_user', ['addstr'])
+            ...mapGetters('m_user', ['addStr'])
         }
     }
 </script>
